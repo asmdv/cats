@@ -11,6 +11,7 @@
             flex-direction: column;
             align-items: center;
             margin: 20px;
+            background-color: #f0f0f0;
         }
         h1 {
             color: #FF6347;
@@ -23,6 +24,7 @@
             text-align: center;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             margin-bottom: 20px;
+            background-color: #fff;
         }
         #catCard img {
             width: 100%;
@@ -37,9 +39,60 @@
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        .buttons button:hover {
+            background-color: #ddd;
         }
         #likedCats {
             margin-top: 20px;
+        }
+        #chat {
+            margin-top: 20px;
+            width: 320px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+        #chatBox {
+            border: 1px solid #ddd;
+            padding: 10px;
+            width: 300px;
+            height: 200px;
+            overflow-y: scroll;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+        #chatBox div {
+            margin: 5px 0;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        #chatBox .user-message {
+            background-color: #e6ffe6;
+            text-align: right;
+        }
+        #chatBox .cat-message {
+            background-color: #ffe6e6;
+        }
+        #chatInput {
+            width: 240px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        #chat button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #FF6347;
+            color: #fff;
+            cursor: pointer;
+        }
+        #chat button:hover {
+            background-color: #ff4500;
         }
     </style>
 </head>
@@ -50,8 +103,8 @@
         <h2 id="catName"></h2>
     </div>
     <div class="buttons">
-        <button onclick="dislikeCat()">Dislike</button>
-        <button onclick="likeCat()">Like</button>
+        <button onclick="dislikeCat()" style="background-color: #ff6666;">Dislike</button>
+        <button onclick="likeCat()" style="background-color: #66ff66;">Like</button>
     </div>
     <div id="likedCats">
         <h2>Liked Cats:</h2>
@@ -61,8 +114,8 @@
     <!-- Chat Section -->
     <div id="chat" style="display:none;">
         <h2>Chat with <span id="chatCatName"></span></h2>
-        <div id="chatBox" style="border:1px solid #ddd; padding: 10px; width: 300px; height: 200px; overflow-y: scroll; margin-bottom: 10px;"></div>
-        <input type="text" id="chatInput" style="width: 240px;" placeholder="Type a message">
+        <div id="chatBox"></div>
+        <input type="text" id="chatInput" placeholder="Type a message">
         <button onclick="sendMessage()">Send</button>
     </div>
 
@@ -71,6 +124,19 @@
         let currentIndex = 0;
         const likedCats = [];
         let currentChatCat = null;
+
+        // Predefined cat replies
+        const catReplies = [
+            "Meow! 🐾",
+            "Purr... 😺",
+            "Hiss! 😾",
+            "I'm watching you! 👀",
+            "Can you pet me? 🐱",
+            "I love naps. How about you? 😴",
+            "Have you got any treats? 🐟",
+            "I'm a curious cat! 🕵️‍♀️",
+            "Time for a catnap. 🛏️"
+        ];
 
         // Function to fetch cat data from API
         async function fetchCats() {
@@ -116,6 +182,9 @@
             likedCats.forEach(cat => {
                 const li = document.createElement('li');
                 li.textContent = cat.name;
+                li.style.cursor = 'pointer';
+                li.style.padding = '5px';
+                li.style.borderBottom = '1px solid #ddd';
                 li.onclick = () => openChat(cat);
                 likedCatsList.appendChild(li);
             });
@@ -135,16 +204,20 @@
             const chatInput = document.getElementById('chatInput');
             const message = chatInput.value.trim();
             if (message) {
-                const div = document.createElement('div');
-                div.innerHTML = `<b>You:</b> ${message}`;
-                chatBox.appendChild(div);
+                const userDiv = document.createElement('div');
+                userDiv.className = 'user-message';
+                userDiv.innerHTML = `<b>You:</b> ${message}`;
+                chatBox.appendChild(userDiv);
                 chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
                 chatInput.value = ''; // Clear the input
-                // Simulating a response from the cat
+
+                // Simulating a response from the cat with a random reply
                 setTimeout(() => {
-                    const div = document.createElement('div');
-                    div.innerHTML = `<b>${currentChatCat.name}:</b> Meow!`;
-                    chatBox.appendChild(div);
+                    const catDiv = document.createElement('div');
+                    catDiv.className = 'cat-message';
+                    const randomReply = catReplies[Math.floor(Math.random() * catReplies.length)];
+                    catDiv.innerHTML = `<b>${currentChatCat.name}:</b> ${randomReply}`;
+                    chatBox.appendChild(catDiv);
                     chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
                 }, 1000);
             }
