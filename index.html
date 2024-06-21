@@ -1,0 +1,324 @@
+<!-- 
+
+// music recommendation based on today's top hits
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Recommendation System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .mood-button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #recommendations {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Music Recommendation System</h1>
+    <p>Select your mood to get a music recommendation:</p>
+    <button class="mood-button" onclick="recommendMusic('happy')">Happy</button>
+    <button class="mood-button" onclick="recommendMusic('sad')">Sad</button>
+    <button class="mood-button" onclick="recommendMusic('energetic')">Energetic</button>
+    <button class="mood-button" onclick="recommendMusic('relaxed')">Relaxed</button>
+    <div id="recommendations"></div>
+    
+    <script>
+        const musicRecommendations = {
+            happy: [
+                "Happy - Pharrell Williams",
+                "Uptown Funk - Bruno Mars",
+                "Can't Stop The Feeling - Justin Timberlake"
+            ],
+            sad: [
+                "Someone Like You - Adele",
+                "Stay With Me - Sam Smith",
+                "Fix You - Coldplay"
+            ],
+            energetic: [
+                "Eye of the Tiger - Survivor",
+                "Lose Yourself - Eminem",
+                "We Will Rock You - Queen"
+            ],
+            relaxed: [
+                "Weightless - Marconi Union",
+                "Clair de Lune - Debussy",
+                "Sunset Lover - Petit Biscuit"
+            ]
+        };
+
+        function recommendMusic(mood) {
+            const recommendationsDiv = document.getElementById('recommendations');
+            const recommendations = musicRecommendations[mood];
+            let htmlContent = `<h2>Recommended ${mood.charAt(0).toUpperCase() + mood.slice(1)} Music:</h2><ul>`;
+            recommendations.forEach(song => {
+                htmlContent += `<li>${song}</li>`;
+            });
+            htmlContent += '</ul>';
+            recommendationsDiv.innerHTML = htmlContent;
+        }
+    </script>
+</body>
+</html> -->
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tinder for Cats</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+        h1 {
+            color: #FF6347;
+        }
+        #catCard {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        #catCard img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 200px;
+        }
+        .buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #likedCats {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tinder for Cats</h1>
+    <div id="catCard">
+        <img id="catImage" src="" alt="Cat Image">
+        <h2 id="catName"></h2>
+    </div>
+    <div class="buttons">
+        <button onclick="dislikeCat()">Dislike</button>
+        <button onclick="likeCat()">Like</button>
+    </div>
+    <div id="likedCats">
+        <h2>Liked Cats:</h2>
+        <ul id="likedCatsList"></ul>
+    </div>
+
+    <script>
+        const cats = [
+            { name: "Whiskers", image: "https://placekitten.com/300/300" },
+            { name: "Fluffy", image: "https://placekitten.com/301/300" },
+            { name: "Shadow", image: "https://placekitten.com/302/300" },
+            { name: "Mittens", image: "https://placekitten.com/303/300" },
+            { name: "Simba", image: "https://placekitten.com/304/300" }
+        ];
+
+        let currentIndex = 0;
+        const likedCats = [];
+
+        function displayCat(index) {
+            if (index < cats.length) {
+                document.getElementById('catImage').src = cats[index].image;
+                document.getElementById('catName').innerText = cats[index].name;
+            } else {
+                document.getElementById('catCard').innerHTML = "<h2>No more cats!</h2>";
+                document.querySelector('.buttons').style.display = 'none';
+            }
+        }
+
+        function likeCat() {
+            likedCats.push(cats[currentIndex]);
+            updateLikedCatsList();
+            currentIndex++;
+            displayCat(currentIndex);
+        }
+
+        function dislikeCat() {
+            currentIndex++;
+            displayCat(currentIndex);
+        }
+
+        function updateLikedCatsList() {
+            const likedCatsList = document.getElementById('likedCatsList');
+            likedCatsList.innerHTML = "";
+            likedCats.forEach(cat => {
+                const li = document.createElement('li');
+                li.textContent = cat.name;
+                likedCatsList.appendChild(li);
+            });
+        }
+
+        // Initialize with the first cat
+        displayCat(currentIndex);
+    </script>
+</body>
+</html> -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tinder for Cats</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+        h1 {
+            color: #FF6347;
+        }
+        #catCard {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        #catCard img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 200px;
+        }
+        .buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #likedCats {
+            margin-top: 20px;
+        }
+        /* New styles for the chat page */
+        #chatPage {
+            display: none;
+        }
+        #chatBox {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        #chatBox p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        #backButton {
+            margin-top: 20px;
+            cursor: pointer;
+            color: #0078D4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tinder for Cats</h1>
+    <div id="catCard">
+        <img id="catImage" src="" alt="Cat Image">
+        <h2 id="catName"></h2>
+    </div>
+    <div class="buttons">
+        <button onclick="dislikeCat()">Dislike</button>
+        <button onclick="likeCat()">Like</button>
+    </div>
+    <div id="likedCats">
+        <h2>Liked Cats:</h2>
+        <ul id="likedCatsList"></ul>
+    </div>
+
+    <!-- Chat page -->
+    <div id="chatPage">
+        <div id="chatBox">
+            <p>🐾 Meow! I'm Whiskers. How can I help you?</p>
+            <!-- Add more cat responses here... -->
+        </div>
+        <div id="backButton">Go back</div>
+    </div>
+
+    <script>
+        const cats = [
+            { name: "Whiskers", image: "https://placekitten.com/300/300" },
+            { name: "Fluffy", image: "https://placekitten.com/301/300" },
+            { name: "Shadow", image: "https://placekitten.com/302/300" },
+            { name: "Mittens", image: "https://placekitten.com/303/300" },
+            { name: "Simba", image: "https://placekitten.com/304/300" }
+        ];
+
+        let currentIndex = 0;
+        const likedCats = [];
+
+        function displayCat(index) {
+            if (index < cats.length) {
+                document.getElementById('catImage').src = cats[index].image;
+                document.getElementById('catName').innerText = cats[index].name;
+            } else {
+                document.getElementById('catCard').innerHTML = "<h2>No more cats!</h2>";
+                document.querySelector('.buttons').style.display = 'none';
+            }
+        }
+
+        function likeCat() {
+            likedCats.push(cats[currentIndex]);
+            updateLikedCatsList();
+            currentIndex++;
+            displayCat(currentIndex);
+            showChatPage(); // Show chat page after liking a cat
+        }
+
+        function dislikeCat() {
+            currentIndex++;
+            displayCat(currentIndex);
+        }
+
+        function updateLikedCatsList() {
+            const likedCatsList = document.getElementById('likedCatsList');
+            likedCatsList.innerHTML = "";
+            likedCats.forEach(cat => {
+                const li = document.createElement('li');
+                li.textContent = cat.name;
+                likedCatsList.appendChild(li);
+            }); -->
